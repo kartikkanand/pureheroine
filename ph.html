@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PURE HEROINE</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #0a0a0a;
+    color: white;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 50px;
+    background: black;
+}
+
+nav a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.hero {
+    height: 90vh;
+    background: url("copy_EDB02144-6723-442B-A3C3-BA85EC7749E7.jpeg") center/cover;
+}
+
+.products {
+    padding: 50px;
+    text-align: center;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: #151515;
+    padding: 20px;
+}
+
+.card img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.price {
+    color: #ccc;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    background: white;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* CART */
+#cart {
+    background: #111;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>PURE HEROINE</h1>
+    <nav>
+        <a href="#products">Shop</a>
+        <a href="#cart">Cart</a>
+    </nav>
+</header>
+
+<section class="hero"></section>
+
+<!-- MAIN -->
+<section id="products" class="products">
+    <h2>Shop</h2>
+
+    <div class="product-grid">
+
+        <div class="card">
+            <img src="IMG_4532.jpeg">
+            <h3>T-Shirts</h3>
+            <a href="#oversized"><button>View</button></a>
+        </div>
+
+        <div class="card">
+            <img src="0d918eb49254bdd9b5010a0a52cdfc92.jpg">
+            <h3>Shirts</h3>
+            <a href="#shirts"><button>View</button></a>
+        </div>
+
+        <div class="card">
+            <img src="2b1330f4bd1efba90b8a1315241c69fd.jpg">
+            <h3>Hoodies</h3>
+            <a href="#hoodies"><button>View</button></a>
+        </div>
+
+    </div>
+</section>
+
+<!-- TSHIRTS -->
+<section id="oversized" class="products">
+    <h2>T-Shirts</h2>
+    <div class="product-grid">
+        <div class="card">
+            <img src="IMG_4532.jpeg">
+            <p class="price">₹999</p>
+            <button onclick="addToCart('T-Shirt 1', 999)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="IMG_4533.jpeg">
+            <p class="price">₹999</p>
+            <button onclick="addToCart('T-Shirt 2', 999)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="IMG_4534.jpeg">
+            <p class="price">₹999</p>
+            <button onclick="addToCart('T-Shirt 3', 999)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="IMG_4535.jpeg">
+            <p class="price">₹999</p>
+            <button onclick="addToCart('T-Shirt 4', 999)">Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<!-- SHIRTS -->
+<section id="shirts" class="products">
+    <h2>Shirts</h2>
+    <div class="product-grid">
+        <div class="card">
+            <img src="0d918eb49254bdd9b5010a0a52cdfc92.jpg">
+            <p class="price">₹1499</p>
+            <button onclick="addToCart('Shirt 1', 1499)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="4dae405d3e53079d3d1ca4274633425c.jpg">
+            <p class="price">₹1499</p>
+            <button onclick="addToCart('Shirt 2', 1499)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="fb52377fc61145ee03e64e5d17701253.jpg">
+            <p class="price">₹1499</p>
+            <button onclick="addToCart('Shirt 3', 1499)">Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<!-- HOODIES -->
+<section id="hoodies" class="products">
+    <h2>Hoodies</h2>
+    <div class="product-grid">
+        <div class="card">
+            <img src="2b1330f4bd1efba90b8a1315241c69fd.jpg">
+            <p class="price">₹1999</p>
+            <button onclick="addToCart('Hoodie 1', 1999)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="1e7091f454e0a453275a8c13db8a340f.jpg">
+            <p class="price">₹1999</p>
+            <button onclick="addToCart('Hoodie 2', 1999)">Add to Cart</button>
+        </div>
+        <div class="card">
+            <img src="b4dacf0d3d5f0046dec8c2baede1591f.jpg">
+            <p class="price">₹1999</p>
+            <button onclick="addToCart('Hoodie 3', 1999)">Add to Cart</button>
+        </div>
+    </div>
+</section>
+
+<!-- CART -->
+<section id="cart" class="products">
+    <h2>Cart</h2>
+    <div id="cartItems"></div>
+    <p id="total">Total: ₹0</p>
+</section>
+
+<footer style="text-align:center;padding:20px;background:black;">
+    © PURE HEROINE
+</footer>
+
+<script>
+let cart = [];
+
+function addToCart(name, price) {
+    cart.push({name, price});
+    renderCart();
+}
+
+function renderCart() {
+    const cartDiv = document.getElementById("cartItems");
+    const totalDiv = document.getElementById("total");
+
+    cartDiv.innerHTML = "";
+    let total = 0;
+
+    cart.forEach(item => {
+        cartDiv.innerHTML += "<p>" + item.name + " - ₹" + item.price + "</p>";
+        total += item.price;
+    });
+
+    totalDiv.innerText = "Total: ₹" + total;
+}
+</script>
+
+</body>
+</html>v
